@@ -98,3 +98,5 @@ batch_size, num_queries, num_kvpairs, valid_lens = 2, 4, 6, torch.tensor([3, 2])
 X = torch.ones((batch_size, num_queries, num_hiddens))
 Y = torch.ones((batch_size, num_kvpairs, num_hiddens))
 print(attention(X, Y, Y, valid_lens).shape)
+
+#shan
