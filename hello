@@ -1,0 +1,21 @@
+#####################作者的奖励方式###############################
+        # if solution['result'] :
+        #     reward = solution['v_net_r2c_ratio']
+        # elif solution['place_result'] and solution['route_result']:
+        #     reward = 1 / self.v_net.num_nodes
+        # else:
+        #     reward = - 1 / self.v_net.num_nodes
+        # self.solution['v_net_reward'] += reward
+        # return reward
+
+        #####################自己的奖励方式1###############################
+        if solution['result'] :
+            reward = solution['v_net_r2c_ratio']
+        elif solution['place_result'] and solution['route_result']:
+            node_data = self.last_observation['p_net_x'][solution['selected_actions'][-1]]
+            load_balance = (node_data[0])*(node_data[2])
+            reward = (6 / self.v_net.num_nodes)*load_balance#*(1.0/(self.last_observation['v_net_x'][2]+1))
+        else:
+            reward = -(6 / self.v_net.num_nodes)*load_balance#*(1.0/(self.last_observation['v_net_x'][2]+1))
+        self.solution['v_net_reward'] += reward
+        return reward 
